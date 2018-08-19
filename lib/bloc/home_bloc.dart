@@ -19,6 +19,7 @@ class HomeBloc {
 
   HomeBloc._internal() {
     initData();
+    initAnalytics();
   }
 
   Future initData() async {
@@ -42,5 +43,9 @@ class HomeBloc {
 
   void validateAuth(String idToken) {
     assert(idToken != null);
+  }
+
+  Future initAnalytics() async {
+    await apiHelper.makeAnalytics();
   }
 }

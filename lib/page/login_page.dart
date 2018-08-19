@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sankalan/data/api_helper.dart';
 import 'package:flutter_sankalan/page/upload_story_page.dart';
+import 'package:flutter_sankalan/utils/dialog_utils.dart';
+import 'package:flutter_sankalan/utils/network_utils.dart';
 import 'package:flutter_sankalan/utils/prefs_helper.dart';
 import 'package:flutter_sankalan/utils/toast_utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -34,11 +38,8 @@ class LoginPageState extends State<LoginPage> {
       _currentUser = account;
       print(_currentUser.displayName);
       GoogleSignInAuthentication authentication = await _currentUser.authentication;
-      //homeBloc.validateAuth(authentication.idToken);
-      Navigator.pop(context);
-      ToastUtils.showToast(message: "Login Successful!");
-      prefsHelper.userLogged = true;
-      Navigator.push(context, new MaterialPageRoute(builder: (context) => new UploadStoryPage()));
+
+      makeAuthReq(authentication.idToken);
     });
   }
 
@@ -79,5 +80,37 @@ class LoginPageState extends State<LoginPage> {
         ),
       ],
     );
+  }
+
+  Future makeAuthReq(String idToken) async {
+    assert(idToken != null);
+    DialogUtils.showProgressBar(context, "Please Wait!");
+    try {
+      var response = await apiHelper.makeLoginReq(idToken);
+      if (NetworkUtils.isReqSuccess(tag: "login", response: response)) {
+        Map map = json.decode(response.body);
+        prefsHelper.token = map['token'];
+        prefsHelper.email = map['email'];
+
+        Navigator.pop(context);
+        Navigator.pop(context);
+        ToastUtils.showToast(message: "Login Successful!");
+        prefsHelper.userLogged = true;
+        Navigator.push(context, new MaterialPageRoute(builder: (context) => new UploadStoryPage()));
+        //Navigator.pop(context);
+      } else {
+        Navigator.pop(context);
+
+        _googleSignIn.signOut();
+        ToastUtils.showToast(message: "Something went wrong. Please try again.");
+      }
+    } catch (e) {
+      Navigator.pop(context);
+
+      print(e);
+      _googleSignIn.signOut();
+
+      ToastUtils.showToast(message: "Something went wrong. Please try again.");
+    }
   }
 }

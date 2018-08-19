@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_sankalan/bloc/home_bloc.dart';
 import 'package:flutter_sankalan/data/api_helper.dart';
+import 'package:flutter_sankalan/utils/dialog_utils.dart';
 import 'package:flutter_sankalan/utils/network_utils.dart';
 import 'package:flutter_sankalan/utils/toast_utils.dart';
 
@@ -35,9 +36,12 @@ class UploadStoryPageState extends State<UploadStoryPage> {
       appBar: new AppBar(
         title: new Text("Upload Story"),
         actions: <Widget>[
-          new IconButton(
-            icon: Icon(Icons.done),
-            onPressed: onDonePress,
+          Padding(
+            padding: const EdgeInsets.only(right: 6.0),
+            child: new IconButton(
+              icon: Icon(Icons.done),
+              onPressed: onDonePress,
+            ),
           ),
         ],
       ),
@@ -139,17 +143,23 @@ class UploadStoryPageState extends State<UploadStoryPage> {
   }
 
   Future uploadStory(String textTitle, String textWriterName, String textStory) async {
+    DialogUtils.showProgressBar(context, "Uploading!");
+
     try {
       var response = await apiHelper.uploadStory(textTitle, textWriterName, textStory);
       if (NetworkUtils.isReqSuccess(tag: "uploadStory", response: response)) {
         ToastUtils.showToast(message: "Story uploaded successfully");
         homeBloc.initData();
-        Navigator.pop(context);
+        Navigator.popUntil(context, (route) => route.isFirst);
       } else {
+        Navigator.popUntil(context, (route) => route.isFirst);
+
         ToastUtils.showToast(message: "Something went wrong. Please try again.");
       }
     } catch (e) {
       print(e);
+      Navigator.popUntil(context, (route) => route.isFirst);
+
       ToastUtils.showToast(message: "Something went wrong. Please try again.");
     }
   }

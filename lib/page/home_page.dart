@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: new Text(
-          "हिन्दी संकलन",
+          "Sankalan",
           style: new TextStyle(fontWeight: FontWeight.w500),
         ),
         elevation: 2.0,
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: new TextStyle(fontWeight: FontWeight.w700, color: Colors.black87, fontSize: 18.0),
-                maxLines: 2,
+                maxLines: 1,
               ),
             ),
             Padding(
@@ -99,12 +99,13 @@ class HomePage extends StatelessWidget {
               child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new Text(
-                    "~ " + item.name,
-                    style: new TextStyle(fontWeight: FontWeight.w600, color: Colors.black87),
-                  ),
                   Expanded(
-                    child: SizedBox(),
+                    child: new Text(
+                      "~ " + item.name,
+                      style: new TextStyle(fontWeight: FontWeight.w600, color: Colors.black87),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 4.0),
@@ -146,7 +147,7 @@ class HomePage extends StatelessWidget {
         child: new Center(
           child: new Text(
             "UPLOAD YOUR STORY",
-            style: new TextStyle(fontWeight: FontWeight.w700, color: Colors.teal, fontSize: 13.0),
+            style: new TextStyle(fontWeight: FontWeight.w700, color: Colors.teal, fontSize: 15.0),
           ),
         ),
       ),

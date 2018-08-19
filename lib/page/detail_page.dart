@@ -19,6 +19,7 @@ class DetailPage extends StatelessWidget {
     assert(item != null);
 
     return new Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: new AppBar(
         elevation: 2.0,
         title: new Text(
@@ -36,7 +37,6 @@ class DetailPage extends StatelessWidget {
         ],
       ),
       body: new Container(
-        color: Colors.grey[100],
         child: new SingleChildScrollView(
           padding: const EdgeInsets.all(12.0),
           child: Column(

@@ -5,6 +5,7 @@ import 'package:flutter_sankalan/page/detail_page.dart';
 import 'package:flutter_sankalan/page/upload_story_page.dart';
 import 'package:flutter_sankalan/utils/dialog_utils.dart';
 import 'package:flutter_sankalan/utils/prefs_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   BuildContext context;
@@ -15,10 +16,38 @@ class HomePage extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: new Text(
-          "Sankalan",
-          style: new TextStyle(fontWeight: FontWeight.w500),
+        title: Row(
+          children: <Widget>[
+            Container(
+              height: 36.0,
+              width: 36.0,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fitHeight,
+                    image: AssetImage('assets/images/logo.png'),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: new Text(
+                "Sankalan",
+                style: new TextStyle(fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
         ),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: new IconButton(
+              icon: Icon(Icons.info_outline),
+              onPressed: onInfoPress,
+            ),
+          ),
+        ],
         elevation: 2.0,
       ),
       body: body(),
@@ -157,5 +186,113 @@ class HomePage extends StatelessWidget {
   void openDetailPage(ItemBlog item) {
     Navigator.push(context, new MaterialPageRoute(builder: (context) => new DetailPage(item)));
     homeBloc.makeViewsUpdateRequest(item.id);
+  }
+
+  void onInfoPress() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              content: new Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new SizedBox(
+                    height: 8.0,
+                  ),
+                  Container(
+                    height: 100.0,
+                    width: 96.0,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.fitHeight,
+                          image: AssetImage('assets/images/ayush.jpeg'),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: new Text(
+                      "Made with ❤️ by Ayush P Gupta",
+                      style: new TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  new SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      GestureDetector(
+                        child: Container(
+                          height: 28.0,
+                          width: 28.0,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fitHeight,
+                                image: AssetImage('assets/images/github.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () async {
+                          await launch("https://github.com/apgapg");
+                        },
+                      ),
+                      SizedBox(
+                        width: 24.0,
+                      ),
+                      GestureDetector(
+                        child: Container(
+                          height: 30.0,
+                          width: 28.0,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('assets/images/medium.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () async {
+                          await launch("https://medium.com/@ayushpguptaapg/");
+                        },
+                      ),
+                      SizedBox(
+                        width: 24.0,
+                      ),
+                      GestureDetector(
+                        child: Container(
+                          height: 24.0,
+                          width: 28.0,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fitHeight,
+                                image: AssetImage('assets/images/linkedin.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () async {
+                            await launch("https://www.linkedin.com/in/ayush-p-gupta-72026a119/");
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: new Text("CLOSE")),
+              ],
+            ));
   }
 }

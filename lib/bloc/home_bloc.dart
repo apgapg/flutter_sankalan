@@ -7,8 +7,19 @@ import 'package:flutter_sankalan/utils/network_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 
+HomeBloc homeBloc = new HomeBloc();
+
 class HomeBloc {
+  static HomeBloc _instance = new HomeBloc._internal();
   final BehaviorSubject<BlogModel> dataController = new BehaviorSubject();
+
+  factory HomeBloc() {
+    return _instance;
+  }
+
+  HomeBloc._internal() {
+    initData();
+  }
 
   Future initData() async {
     try {
@@ -23,5 +34,13 @@ class HomeBloc {
       print(e);
       dataController.addError("Internet not available");
     }
+  }
+
+  Future makeViewsUpdateRequest(int id) async {
+    await apiHelper.makeViewsUpdateRequest(id);
+  }
+
+  void validateAuth(String idToken) {
+    assert(idToken != null);
   }
 }

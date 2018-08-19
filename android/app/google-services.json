@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "6072571696",
+    "firebase_url": "https://sankalan-139c9.firebaseio.com",
+    "project_id": "sankalan-139c9",
+    "storage_bucket": "sankalan-139c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6072571696:android:9611c327b2e339f4",
+        "android_client_info": {
+          "package_name": "com.coddu.fluttersankalan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6072571696-gbfslavsa81ev0v44anvbfd0pf5irphf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coddu.fluttersankalan",
+            "certificate_hash": "27ce5d3482018d9ba65fbbd502feec6590853989"
+          }
+        },
+        {
+          "client_id": "6072571696-k98moql6vtuta90efc77lnql9jdne5ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPM9mP96YWBiABMayIwLfjPhajb-FtCok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6072571696-k98moql6vtuta90efc77lnql9jdne5ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

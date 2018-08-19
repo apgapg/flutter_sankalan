@@ -8,10 +8,10 @@ part of 'blog_model.dart';
 
 ItemBlog _$ItemBlogFromJson(Map<String, dynamic> json) {
   $checkKeys(json,
-      requiredKeys: ['name', 'title', 'content', 'views'],
-      disallowNullValues: ['name', 'title', 'content', 'views']);
-  return ItemBlog(json['name'] as String, json['title'] as String,
-      json['content'] as String, json['views'] as int);
+      requiredKeys: ['id', 'name', 'title', 'content', 'views'],
+      disallowNullValues: ['id', 'name', 'title', 'content', 'views']);
+  return ItemBlog(json['id'] as int, json['name'] as String,
+      json['title'] as String, json['content'] as String, json['views'] as int);
 }
 
 Map<String, dynamic> _$ItemBlogToJson(ItemBlog instance) {
@@ -23,6 +23,7 @@ Map<String, dynamic> _$ItemBlogToJson(ItemBlog instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
   writeNotNull('name', instance.name);
   writeNotNull('title', instance.title);
   writeNotNull('content', instance.content);

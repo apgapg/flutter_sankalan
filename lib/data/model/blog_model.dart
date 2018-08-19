@@ -25,6 +25,8 @@ class BlogModel {
 @JsonSerializable()
 class ItemBlog {
   @JsonKey(required: true, disallowNullValue: true)
+  final int id;
+  @JsonKey(required: true, disallowNullValue: true)
   final String name;
   @JsonKey(required: true, disallowNullValue: true)
   final String title;
@@ -33,7 +35,7 @@ class ItemBlog {
   @JsonKey(required: true, disallowNullValue: true)
   final int views;
 
-  ItemBlog(this.name, this.title, this.content, this.views);
+  ItemBlog(this.id, this.name, this.title, this.content, this.views);
 
   factory ItemBlog.fromJson(Map<String, dynamic> json) => _$ItemBlogFromJson(json);
 }

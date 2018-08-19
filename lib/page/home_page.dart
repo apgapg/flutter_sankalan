@@ -192,6 +192,7 @@ class HomePage extends StatelessWidget {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
+              title: new Text("About the Developer:"),
               content: new Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_sankalan/page/home_page.dart';
 import 'package:flutter_sankalan/utils/prefs_helper.dart';
 
 void main() async {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   prefsHelper.initialize();
   return runApp(new MyApp());
 }

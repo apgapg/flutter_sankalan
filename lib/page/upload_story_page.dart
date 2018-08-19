@@ -96,6 +96,9 @@ class UploadStoryPageState extends State<UploadStoryPage> {
                   constraints: BoxConstraints(minHeight: 100.0),
                 ),
               ),
+              new Divider(
+                height: 1.0,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                   top: 20.0,

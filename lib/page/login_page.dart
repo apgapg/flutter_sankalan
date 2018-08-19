@@ -62,7 +62,9 @@ class LoginPageState extends State<LoginPage> {
           new Text("Please login to upload your story."),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: new OutlineButton(
+            child: new RaisedButton(
+              textColor: Colors.white,
+              color: Colors.teal,
               onPressed: () {
                 _handleSignIn();
               },
@@ -96,7 +98,9 @@ class LoginPageState extends State<LoginPage> {
         Navigator.pop(context);
         ToastUtils.showToast(message: "Login Successful!");
         prefsHelper.userLogged = true;
+
         Navigator.push(context, new MaterialPageRoute(builder: (context) => new UploadStoryPage()));
+
         //Navigator.pop(context);
       } else {
         Navigator.pop(context);

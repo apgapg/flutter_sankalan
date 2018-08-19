@@ -279,7 +279,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         onTap: () async {
-                            await launch("https://www.linkedin.com/in/ayush-p-gupta-72026a119/");
+                          await launch("https://www.linkedin.com/in/ayush-p-gupta-72026a119/");
                         },
                       ),
                     ],

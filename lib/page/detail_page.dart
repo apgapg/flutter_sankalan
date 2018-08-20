@@ -1,39 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sankalan/data/model/blog_model.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   ItemBlog item;
 
   DetailPage(this.item);
 
+  @override
+  DetailPageState createState() {
+    return new DetailPageState();
+  }
+}
+
+class DetailPageState extends State<DetailPage> {
   double defaultTextSize = 18.0;
 
   double maxTextSize = 22.0;
 
   double currentTextSize = 18.0;
 
-  final GlobalKey<ResizableTextState> key1 = new GlobalKey<ResizableTextState>();
+  Color textColorDay = Colors.black87;
+  Color backgroundColorDay = Colors.grey[100];
+  Color textColorNight = Colors.white70;
+  Color backgroundColorNight = Colors.grey[900];
+  bool nightMode = false;
 
   @override
   Widget build(BuildContext context) {
-    assert(item != null);
+    assert(widget.item != null);
 
     return new Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: nightMode ? backgroundColorNight : backgroundColorDay,
       appBar: new AppBar(
         elevation: 2.0,
         title: new Text(
-          item.title,
+          widget.item.title,
           softWrap: true,
           overflow: TextOverflow.ellipsis,
           style: new TextStyle(fontWeight: FontWeight.w500),
         ),
-        centerTitle: true,
         actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 0.0),
+            child: new IconButton(icon: Icon(Icons.brightness_medium), onPressed: onNightModePress),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
             child: new IconButton(icon: Icon(Icons.format_size), onPressed: onFontSizeButtonPress),
-          )
+          ),
         ],
       ),
       body: new Container(
@@ -41,12 +55,15 @@ class DetailPage extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: <Widget>[
-              ResizableText(key: key1, text: item.content),
+              new Text(
+                widget.item.content,
+                style: new TextStyle(fontSize: currentTextSize, color: nightMode ? textColorNight : textColorDay, height: 1.1),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: new Text(
-                  "~ " + item.name,
-                  style: new TextStyle(fontSize: 16.0, color: Colors.black87, fontWeight: FontWeight.w700),
+                  "~ " + widget.item.name,
+                  style: new TextStyle(fontSize: 16.0, color: nightMode ? textColorNight : textColorDay, fontWeight: FontWeight.w700),
                 ),
               )
             ],
@@ -57,38 +74,17 @@ class DetailPage extends StatelessWidget {
   }
 
   void onFontSizeButtonPress() {
-    if (currentTextSize >= maxTextSize) {
-      currentTextSize = defaultTextSize;
-    } else
-      currentTextSize = currentTextSize + 2.0;
-    key1.currentState.onFontSizeChange(currentTextSize);
-  }
-}
-
-class ResizableText extends StatefulWidget {
-  final String text;
-
-  ResizableText({Key key, this.text}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() {
-    return new ResizableTextState();
-  }
-}
-
-class ResizableTextState extends State<ResizableText> {
-  double textSize = 18.0;
-  @override
-  Widget build(BuildContext context) {
-    return new Text(
-      widget.text,
-      style: new TextStyle(fontSize: textSize, color: Colors.grey[900], height: 1.1),
-    );
-  }
-
-  void onFontSizeChange(double currentTextSize) {
     setState(() {
-      textSize = currentTextSize;
+      if (currentTextSize >= maxTextSize) {
+        currentTextSize = defaultTextSize;
+      } else
+        currentTextSize = currentTextSize + 2.0;
+    });
+  }
+
+  void onNightModePress() {
+    setState(() {
+      nightMode = !nightMode;
     });
   }
 }

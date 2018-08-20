@@ -82,12 +82,33 @@ class HomePage extends StatelessWidget {
   Widget blogBody(BlogModel model) {
     return new Container(
         color: Colors.grey[200],
-        child: new ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          itemBuilder: (context, index) {
-            return getBlogCard(model.list[index]);
-          },
-          itemCount: model.list.length,
+        child: Stack(
+          children: <Widget>[
+
+            new ListView.builder(
+              padding: const EdgeInsets.only(top: 54.0,bottom: 4.0),
+              itemBuilder: (context, index) {
+                return getBlogCard(model.list[index]);
+              },
+              itemCount: model.list.length,
+            ),
+
+            SingleChildScrollView(
+              padding: const EdgeInsets.only(left: 4.0,right: 4.0,top: 4.0),
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                child: new Row(
+
+                  children: <Widget>[
+                    GroupTextWidget(text: "Popular"),
+                    GroupTextWidget(text: "हिन्दी"),
+                    GroupTextWidget(text: "English"),
+                    GroupTextWidget(text: "Hinglish"),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ));
   }
 
@@ -295,5 +316,29 @@ class HomePage extends StatelessWidget {
                     child: new Text("CLOSE")),
               ],
             ));
+  }
+}
+
+class GroupTextWidget extends StatelessWidget {
+  final String text;
+
+  GroupTextWidget({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50.0,width: 100.0,
+      child: new Card(
+        color: Colors.white,
+        elevation: 2.0,
+        margin: const EdgeInsets.all(4.0),
+        child: new Center(
+          child: new Text(
+            text,
+            style: new TextStyle(color: Colors.teal, fontSize: 16.0, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
+    );
   }
 }

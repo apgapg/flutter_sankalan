@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        elevation: 2.0,
         title: Row(
           children: <Widget>[
             Container(
@@ -48,7 +49,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ],
-        elevation: 2.0,
       ),
       body: body(),
       bottomNavigationBar: bottomBar(),
@@ -84,21 +84,18 @@ class HomePage extends StatelessWidget {
         color: Colors.grey[200],
         child: Stack(
           children: <Widget>[
-
             new ListView.builder(
-              padding: const EdgeInsets.only(top: 54.0,bottom: 4.0),
+              padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
               itemBuilder: (context, index) {
                 return getBlogCard(model.list[index]);
               },
               itemCount: model.list.length,
             ),
-
-            SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 4.0,right: 4.0,top: 4.0),
+            /*SingleChildScrollView(
+              padding: const EdgeInsets.only(left: 4.0, right: 4.0, top: 4.0),
               scrollDirection: Axis.horizontal,
               child: Container(
                 child: new Row(
-
                   children: <Widget>[
                     GroupTextWidget(text: "Popular"),
                     GroupTextWidget(text: "हिन्दी"),
@@ -107,7 +104,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            ),*/
           ],
         ));
   }
@@ -191,8 +188,7 @@ class HomePage extends StatelessWidget {
           DialogUtils.showLoginReqDialog(context);
       },
       child: new Container(
-        decoration: new BoxDecoration(
-            color: Colors.white, shape: BoxShape.rectangle, boxShadow: <BoxShadow>[new BoxShadow(color: Colors.grey, blurRadius: 1.5)]),
+        decoration: new BoxDecoration(color: Colors.white, shape: BoxShape.rectangle, boxShadow: <BoxShadow>[new BoxShadow(color: Colors.grey, blurRadius: 1.5)]),
         height: 44.0,
         child: new Center(
           child: new Text(
@@ -327,7 +323,8 @@ class GroupTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.0,width: 100.0,
+      height: 50.0,
+      width: 100.0,
       child: new Card(
         color: Colors.white,
         elevation: 2.0,

@@ -34,6 +34,7 @@ class UploadStoryPageState extends State<UploadStoryPage> {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: new AppBar(
+        elevation: 2.0,
         title: new Text("Upload Story"),
         actions: <Widget>[
           Padding(

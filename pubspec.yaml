@@ -24,6 +24,7 @@ dependencies:
   google_sign_in: "^3.0.4"
   device_info: ^0.2.1
   url_launcher: ^3.0.3
+  firebase_analytics: ^2.0.0
 
 
 

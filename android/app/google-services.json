@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "6072571696-hnf0stg3gbhiglqlcbp603g4mmp2d3v0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coddu.fluttersankalan",
+            "certificate_hash": "b24a38293d9f43402a354e56fe059e5de1c0cd4e"
+          }
+        },
+        {
           "client_id": "6072571696-k98moql6vtuta90efc77lnql9jdne5ti.apps.googleusercontent.com",
           "client_type": 3
         }
